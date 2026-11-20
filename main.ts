@@ -14,9 +14,6 @@
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-// Packaging stays the same: app/ and screenshots/ are copied as-is, and buildDossier keeps these options.
-// Ledger mark: the second recorded pass leaves copy order and dossier caps untouched.
-// Replay mark: a later pass still copies the same trees and writes the same dossier options.
 import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
