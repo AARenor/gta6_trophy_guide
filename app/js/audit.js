@@ -49,7 +49,7 @@ export function renderAudit(root, audit) {
   const cards = [
     [audit.official + "/" + audit.total, "Official names", "Names, descriptions and grades present"],
     [audit.cited + "/" + audit.claims, "Claims cited", "Claims with at least one source"],
-    [audit.twoSites + "/" + audit.claims, "2+ sites", "Claims backed by two or more sites"],
+    [audit.twoSites + "/" + audit.claims, "Claims with 2+ sources", "Claims backed by two or more sites"],
     [audit.guides + "/" + audit.total, "Guides cited", "Guides that cite a source"],
     [audit.pages + " · " + audit.sites, "Pages · sites", "Pages read and distinct sites"],
     [audit.both + "/" + audit.disputes, "Disputes both ways", "Disputes that record both versions"],

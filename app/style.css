@@ -135,7 +135,7 @@ label.btn { position: relative; display: inline-block; }
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 6px;
-  padding: 6px 12px;
+  padding: 3px 12px;
   background: #efeae0;
   border-bottom: 1px solid var(--rule);
 }
@@ -158,10 +158,94 @@ label.btn { position: relative; display: inline-block; }
 
 .stat-miss b { color: var(--brick); }
 
+#roadmap-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 3px 10px 4px;
+  background: var(--card);
+  border-bottom: 1px solid var(--rule);
+}
+
+.strip-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.stage-chip {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 6px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: #f7f4ee;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.stage-num, .stage-count {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.stage-num { color: var(--olive); }
+
+.stage-name { font-weight: 700; }
+
+.stage-count { color: var(--soft); }
+
+.stage-chip.is-current {
+  background: var(--olive);
+  border-color: var(--olive);
+  color: #fff;
+}
+
+.stage-chip.is-current .stage-num,
+.stage-chip.is-current .stage-name,
+.stage-chip.is-current .stage-count { color: #fff; }
+
+.miss-watch {
+  flex: 0 0 auto;
+  margin-left: auto;
+  height: 24px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--brick);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.strip-bar {
+  height: 5px;
+  background: #d9d0c2;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.strip-bar > span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--olive);
+}
+
 #tabs {
   display: flex;
   gap: 4px;
-  padding: 6px 12px 0;
+  padding: 2px 12px 0;
   background: var(--paper);
 }
 
@@ -169,7 +253,7 @@ label.btn { position: relative; display: inline-block; }
   border: 0;
   border-bottom: 3px solid transparent;
   background: transparent;
-  padding: 6px 12px 5px;
+  padding: 3px 10px 3px;
   font-size: 15px;
   font-weight: 700;
   color: var(--soft);
@@ -183,7 +267,7 @@ label.btn { position: relative; display: inline-block; }
 main {
   flex: 1;
   min-height: 0;
-  padding: 8px 12px 10px;
+  padding: 4px 12px 10px;
   display: flex;
   flex-direction: column;
 }
@@ -220,7 +304,7 @@ main {
   background: var(--card);
   border: 1px solid var(--rule);
   border-radius: 8px;
-  padding: 8px 12px 6px;
+  padding: 4px 12px 6px;
 }
 
 #side {
@@ -367,8 +451,8 @@ main {
 }
 
 .official {
-  margin: 4px 0;
-  padding: 6px 10px;
+  margin: 2px 0;
+  padding: 4px 8px;
   border-left: 3px solid var(--olive);
   background: #f7f4ee;
 }
@@ -391,13 +475,13 @@ main {
 .official p::before { content: "“"; }
 .official p::after { content: "”"; }
 
-.tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin: 2px 0; }
 
 .counter {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 4px 0;
+  margin: 2px 0;
   padding: 4px 8px;
   border: 1px solid var(--rule);
   border-radius: 6px;
@@ -416,7 +500,7 @@ main {
 .counter strong { font-size: 18px; font-variant-numeric: tabular-nums; }
 
 .missable-window {
-  margin: 8px 0;
+  margin: 4px 0;
   padding: 7px 10px;
   background: var(--brick-bg);
   border: 1px solid #e0b2ad;
@@ -434,7 +518,7 @@ main {
 .missable-window p, .sources-differ p, .steps, .claims li { margin: 0; }
 
 .sources-differ {
-  margin: 8px 0;
+  margin: 4px 0;
   padding: 7px 10px;
   border: 1px solid var(--rule);
   border-radius: 6px;

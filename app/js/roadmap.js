@@ -10,6 +10,15 @@ export const STAGE_LABELS = {
   6: "After the credits",
 };
 
+export const STRIP_NAMES = {
+  1: "Opening chapters",
+  2: "Middle chapters",
+  3: "Finale",
+  4: "Free roam",
+  5: "Collectibles",
+  6: "Cleanup",
+};
+
 export function buildRoadmap(trophies) {
   const byStage = new Map();
   for (const trophy of trophies) {
@@ -45,6 +54,65 @@ export function buildRoadmap(trophies) {
     if (host) host.pins.push(trophy);
   }
   return { stages, order: stages.flatMap((stage) => stage.trophies) };
+}
+
+export function renderRoadmapStrip(root, trophies, state) {
+  const byStage = new Map();
+  for (const trophy of trophies) {
+    if (!byStage.has(trophy.stage)) byStage.set(trophy.stage, []);
+    byStage.get(trophy.stage).push(trophy);
+  }
+  const stages = [...byStage.keys()].sort((a, b) => a - b).map((stage) => {
+    const list = byStage.get(stage);
+    return {
+      stage,
+      name: STRIP_NAMES[stage] || "Stage " + stage,
+      earned: list.filter((trophy) => state.earned[trophy.id]).length,
+      total: list.length,
+    };
+  });
+  const current = stages.find((stage) => stage.earned < stage.total) || stages[stages.length - 1] || null;
+  const possibly = trophies.filter((trophy) => trophy.missable === "possibly").length;
+  const atRisk = trophies.filter((trophy) => trophy.missable === "at-risk").length;
+  const earned = trophies.filter((trophy) => state.earned[trophy.id]).length;
+  root.replaceChildren();
+  const row = document.createElement("div");
+  row.className = "strip-row";
+  row.setAttribute("role", "list");
+  for (const stage of stages) {
+    const chip = document.createElement("div");
+    chip.className = "stage-chip" + (current && stage.stage === current.stage ? " is-current" : "");
+    chip.setAttribute("role", "listitem");
+    if (current && stage.stage === current.stage) chip.setAttribute("aria-current", "step");
+    const num = document.createElement("span");
+    num.className = "stage-num";
+    num.textContent = String(stage.stage);
+    const name = document.createElement("span");
+    name.className = "stage-name";
+    name.textContent = stage.name;
+    const count = document.createElement("span");
+    count.className = "stage-count";
+    count.textContent = stage.earned + "/" + stage.total;
+    chip.append(num, name, count);
+    row.append(chip);
+  }
+  const watch = document.createElement("button");
+  watch.type = "button";
+  watch.className = "miss-watch";
+  watch.dataset.tab = "missables";
+  watch.textContent = "Missable watch: " + possibly + " possibly · " + atRisk + " at risk";
+  row.append(watch);
+  const bar = document.createElement("div");
+  bar.className = "strip-bar";
+  bar.setAttribute("role", "progressbar");
+  bar.setAttribute("aria-valuemin", "0");
+  bar.setAttribute("aria-valuemax", String(trophies.length));
+  bar.setAttribute("aria-valuenow", String(earned));
+  bar.setAttribute("aria-label", "Trophies earned on the roadmap");
+  const fill = document.createElement("span");
+  fill.style.width = (trophies.length ? (earned / trophies.length) * 100 : 0) + "%";
+  bar.append(fill);
+  root.append(row, bar);
 }
 
 export function windowChapter(trophy) {

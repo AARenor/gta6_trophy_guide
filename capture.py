@@ -75,6 +75,75 @@ def layout_ok(page):
           problems.push("next name overflows without ellipsis");
         }
       }
+      const strip = document.querySelector("#roadmap-strip");
+      if (!strip) problems.push("missing roadmap strip");
+      else {
+        const sr = strip.getBoundingClientRect();
+        if (sr.left < -1 || sr.right > 1281 || sr.top < 0 || sr.bottom > 800) problems.push("strip outside viewport");
+        if (strip.scrollWidth > strip.clientWidth + 1) problems.push("strip overflows");
+        const row = strip.querySelector(".strip-row");
+        if (!row) problems.push("missing strip row");
+        else if (row.scrollWidth > row.clientWidth + 1) problems.push("strip row overflows");
+        const chips = [...strip.querySelectorAll(".stage-chip")];
+        if (chips.length !== 6) problems.push("stage chips " + chips.length);
+        const names = ["Opening chapters", "Middle chapters", "Finale", "Free roam", "Collectibles", "Cleanup"];
+        let earned = 0;
+        let total = 0;
+        const tops = [];
+        chips.forEach((chip, i) => {
+          const box = chip.getBoundingClientRect();
+          tops.push(Math.round(box.top));
+          if (box.width < 20 || box.height < 16 || box.bottom > 800 || box.right > 1280) problems.push("chip not fully visible " + chip.textContent);
+          if (chip.scrollWidth > chip.clientWidth + 1) problems.push("chip text clipped " + chip.textContent);
+          const name = chip.querySelector(".stage-name");
+          const count = chip.querySelector(".stage-count");
+          const num = chip.querySelector(".stage-num");
+          if (!name || name.textContent !== names[i]) problems.push("chip name " + (name && name.textContent));
+          if (!num || num.textContent !== String(i + 1)) problems.push("chip number");
+          if (name && name.scrollWidth > name.clientWidth + 1) problems.push("name clipped " + name.textContent);
+          const parts = count ? count.textContent.split("/") : [];
+          if (parts.length !== 2 || parts.some((part) => part === "" || Number.isNaN(Number(part)))) problems.push("bad earned/total");
+          else {
+            earned += Number(parts[0]);
+            total += Number(parts[1]);
+          }
+        });
+        if (tops.length && new Set(tops).size !== 1) problems.push("stage chips wrap");
+        if (earned !== 14 || total !== 55) problems.push("strip totals " + earned + "/" + total);
+        const current = chips.find((chip) => {
+          const parts = chip.querySelector(".stage-count").textContent.split("/");
+          return Number(parts[0]) < Number(parts[1]);
+        });
+        if (!current || !current.classList.contains("is-current")) problems.push("current stage not highlighted");
+        const watch = strip.querySelector(".miss-watch");
+        if (!watch) problems.push("missing missable watch");
+        else {
+          const box = watch.getBoundingClientRect();
+          if (box.width < 40 || box.right > 1281 || box.bottom > 800 || box.left < 0) problems.push("watch not visible");
+          if (chips[0] && Math.abs(box.top - chips[0].getBoundingClientRect().top) > 2) problems.push("watch not on the chip row");
+          if (watch.textContent !== "Missable watch: 1 possibly · 1 at risk") problems.push("watch text " + watch.textContent);
+          if (watch.dataset.tab !== "missables") problems.push("watch tab target");
+        }
+        const nameSize = chips[0] ? parseFloat(getComputedStyle(chips[0]).fontSize) : 0;
+        if (nameSize < 13) problems.push("strip font " + nameSize);
+        const track = strip.querySelector(".strip-bar");
+        const fill = track && track.querySelector("span");
+        if (!track || !fill) problems.push("missing progress bar");
+        else {
+          const tb = track.getBoundingClientRect();
+          const fb = fill.getBoundingClientRect();
+          if (tb.width < sr.width - 24) problems.push("bar not across strip");
+          if (tb.height < 2 || tb.height > 8) problems.push("bar not thin");
+          if (fb.width < 8) problems.push("bar fill missing");
+          if (chips[0] && tb.top < chips[0].getBoundingClientRect().bottom - 1) problems.push("bar overlaps chips");
+        }
+      }
+      const stats = [...document.querySelectorAll("#audit .stat span")];
+      stats.forEach((span) => {
+        const textBox = span.getBoundingClientRect();
+        const card = span.parentElement.getBoundingClientRect();
+        if (textBox.right > card.right + 1) problems.push("audit label overflow " + span.textContent);
+      });
       const text = document.body.innerText;
       for (const need of [
         "Positive Mental Attitude",
@@ -90,7 +159,9 @@ def layout_ok(page):
         "14 / 55 earned",
         "Story trophy · Chapter 2 · hidden until earned",
         "Reveal this one",
-        "GTA VI · PS5 · 55 trophies",
+        "Claims with 2+ sources",
+        "Missable watch: 1 possibly · 1 at risk",
+        "Opening chapters",
       ]) {
         if (!text.includes(need)) problems.push("missing text: " + need);
       }
@@ -147,6 +218,17 @@ def main():
             page.goto("http://127.0.0.1:8137/", wait_until="networkidle")
             page.wait_for_selector("#guide h2")
             problems = layout_ok(page)
+            page.click(".miss-watch")
+            page.wait_for_selector("#missables:not([hidden]) .miss-card")
+            opened = page.evaluate("""() => ({
+              miss: document.getElementById("missables").hidden === false,
+              tracker: document.getElementById("tracker").hidden === true,
+              on: document.getElementById("tab-missables").classList.contains("on"),
+            })""")
+            if not (opened["miss"] and opened["tracker"] and opened["on"]):
+                raise SystemExit("missable watch did not open Missables")
+            page.click("#tab-tracker")
+            page.wait_for_selector("#guide h2")
             if problems:
                 raise SystemExit("layout:\\n" + "\\n".join(problems))
             save(page, "1-tracker.jpg")

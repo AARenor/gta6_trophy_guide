@@ -2,7 +2,7 @@ import { loadProgress, saveProgress, exportProgress, importProgress } from "./st
 import { FILTERS, GRADES, applyFilters, countByKind, gradeLetter, primaryKind } from "./filters.js";
 import { spoilerShield, concealedLabel, missableTag } from "./spoiler.js";
 import { renderGuide } from "./guide.js";
-import { STAGE_LABELS, buildRoadmap, renderRoadmap, renderNextUp } from "./roadmap.js";
+import { STAGE_LABELS, buildRoadmap, renderRoadmap, renderRoadmapStrip, renderNextUp } from "./roadmap.js";
 import { renderMissables } from "./missables.js";
 import { renderSources, renderGuideSources } from "./sources.js";
 import { computeAudit, renderAudit } from "./audit.js";
@@ -181,6 +181,7 @@ function showTab(name) {
 
 function renderAll(opts) {
   renderProgress();
+  renderRoadmapStrip(document.getElementById("roadmap-strip"), trophies, state);
   renderShield();
   renderChips();
   renderList(opts && opts.keepScroll);
