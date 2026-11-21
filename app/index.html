@@ -3,92 +3,55 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bridge Log — GTA VI trophy guide</title>
+<title>Plate Clerk</title>
+<link rel="icon" href="favicon.svg">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header id="top">
-  <div class="brand">
-    <span class="mark" aria-hidden="true"></span>
-    <div>
-      <h1>Bridge Log</h1>
-      <p class="tag">GTA VI · PlayStation 5 · 55 trophies, every guide cited</p>
-    </div>
+<header id="mast">
+  <div id="brand">
+    <p class="mark">Plate Clerk</p>
+    <p id="meta" class="meta">GTA VI · PS5 · 55 trophies</p>
   </div>
-  <div class="meters">
-    <p id="progress-earned">0 / 55 earned</p>
-    <div id="platinum-bar" class="bar" role="img" aria-label="Platinum progress">
-      <span id="platinum-fill"></span>
-    </div>
-    <p id="grade-meters">P 0/1 · G 0/2 · S 0/6 · B 0/46</p>
+  <div id="progress">
+    <p id="earned-line">0 / 55 earned</p>
+    <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" aria-label="Trophies earned"><span id="progress-fill"></span></div>
+    <p id="grade-counts">P 0/1 · G 0/2 · S 0/6 · B 0/46</p>
   </div>
-  <div class="tools">
-    <label id="spoiler-shield" class="shield">
-      <input id="spoiler-toggle" type="checkbox" checked>
-      <span>Spoiler shield</span>
-    </label>
+  <div id="actions">
+    <button id="spoiler-shield" type="button" aria-pressed="true">Spoiler shield on</button>
     <button id="export-progress" type="button">Export</button>
-    <label id="import-progress" class="file">Import
-      <input id="import-file" type="file" accept="application/json,.json">
-    </label>
-    <p id="saved-state">Saved here</p>
+    <button id="import-progress" type="button">Import</button>
+    <input id="import-file" type="file" accept="application/json,.json" hidden>
+    <p id="saved-note">Saved in this browser</p>
   </div>
 </header>
-<p id="audit" class="audit">55 official · 55 guides cite a source · 1 possibly missable · 0 online · sources read 18–20 Nov 2026</p>
-<nav id="views" aria-label="Guide views">
-  <button type="button" id="view-tracker" class="on" data-view="tracker">Tracker</button>
-  <button type="button" id="view-roadmap" data-view="roadmap">Roadmap</button>
-  <button type="button" id="view-missables" data-view="missables">Missables</button>
-  <button type="button" id="view-counts" data-view="counts">Counts</button>
+<section id="audit" aria-label="Guide audit"></section>
+<nav id="tabs" role="tablist" aria-label="Sections">
+  <button id="tab-tracker" type="button" role="tab" aria-selected="true" aria-controls="tracker">Tracker</button>
+  <button id="tab-roadmap" type="button" role="tab" aria-selected="false" aria-controls="roadmap">Roadmap</button>
+  <button id="tab-missables" type="button" role="tab" aria-selected="false" aria-controls="missables">Missables</button>
+  <button id="tab-sources" type="button" role="tab" aria-selected="false" aria-controls="sources">Sources</button>
 </nav>
-<div id="kind-filters" class="filters">
-  <button type="button" id="filter-all" class="on" data-kind="all">All 55</button>
-  <button type="button" id="filter-story" data-kind="story">Story</button>
-  <button type="button" id="filter-missable" data-kind="missable">Missable</button>
-  <button type="button" id="filter-collectibles" data-kind="collectible">Collectibles</button>
-  <button type="button" id="filter-activities" data-kind="activity">Activities</button>
-  <button type="button" id="filter-online" data-kind="online">Online 0</button>
-  <button type="button" id="filter-side" data-kind="side">Side</button>
-  <button type="button" id="filter-crime" data-kind="crime">Crime</button>
-  <button type="button" id="filter-risk" data-kind="risk">At risk</button>
-  <label>Grade
-    <select id="grade-filter">
-      <option value="all">All</option>
-      <option value="platinum">Platinum</option>
-      <option value="gold">Gold</option>
-      <option value="silver">Silver</option>
-      <option value="bronze">Bronze</option>
-    </select>
-  </label>
-  <label>Status
-    <select id="status-filter">
-      <option value="all">All</option>
-      <option value="open">Not earned</option>
-      <option value="earned">Earned</option>
-    </select>
-  </label>
-  <input id="search-trophies" type="search" placeholder="Search name or description" autocomplete="off">
-</div>
-<main id="tracker">
-  <section id="trophy-list" aria-label="Trophy checklist"></section>
-  <section id="trophy-detail" aria-live="polite"></section>
-  <aside id="guide-sources" aria-label="Sources and next steps"></aside>
-</main>
-<section id="roadmap" hidden></section>
-<section id="missable-flags" hidden></section>
-<section id="counts" hidden></section>
-<section id="export-panel" hidden>
-  <div class="sheet">
-    <h2>Export and import</h2>
-    <p>Progress is stored in this browser. Export writes the JSON below. Import reads that file, or a plain list of official names.</p>
-    <textarea id="export-json" readonly></textarea>
-    <div class="row">
-      <button id="download-progress" type="button">Download JSON</button>
-      <button id="close-export" type="button">Close</button>
-      <p id="import-note"></p>
+<main id="panels">
+  <section id="tracker">
+    <div id="filters" role="toolbar" aria-label="Filters"></div>
+    <div id="list-col">
+      <input id="search" type="search" placeholder="Search trophies  (/)" aria-label="Search trophies" autocomplete="off">
+      <p id="reading"></p>
+      <div id="trophy-list"></div>
     </div>
-  </div>
-</section>
-<script type="module" src="app.js"></script>
+    <article id="guide"></article>
+    <aside id="side">
+      <section id="next-up"></section>
+      <section id="guide-sources"></section>
+    </aside>
+  </section>
+  <section id="roadmap" hidden></section>
+  <section id="missables" hidden></section>
+  <section id="sources" hidden></section>
+</main>
+<p id="toast" role="status" hidden></p>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
