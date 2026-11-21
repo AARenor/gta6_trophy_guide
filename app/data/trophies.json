@@ -30,7 +30,8 @@
     {"t": "The list is 55 trophies: 1 platinum, 2 gold, 6 silver, 46 bronze, all offline.", "s": [1, 5, 9, 13]},
     {"t": "Published platinum estimates cluster around 200 hours, with the story itself closer to 60-80 hours.", "s": [1, 5, 11, 22]},
     {"t": "There is no difficulty setting, no New Game Plus, and no mission replay; cheats turn off trophies and saving.", "s": [1, 5, 11, 21]},
-    {"t": "PlayStation tracks no separate count on this trophy; it is the set of the other 54.", "s": [13, 26]}
+    {"t": "PlayStation tracks no separate count on this trophy; it is the set of the other 54.", "s": [13, 26]},
+    {"t": "Rock Paper Shotgun says a cheat blocks trophies and saving only until you reload an earlier save. Push Square agrees cheats disable trophies, and says Accessible Combat and reduced vehicle damage do not.", "s": [33, 30]}
    ],
    "disputes": [
     {
@@ -38,9 +39,27 @@
      "a": {"t": "GamesRadar styles Vice Got a Price! as a hidden or secret award, the same way it styles the story trophies.", "s": [9]},
      "b": {"t": "games.gg, Output Lag and GTABase list it among the 27 visible trophies, and GTABase's spoiler mask covers 28 others.", "s": [11, 14, 25]},
      "call": "Treat it as visible. Three list pages that sort hidden from visible agree, and that split matches the 28-hidden total."
+    },
+    {
+     "q": "Is the platinum closer to 200 hours or 250?",
+     "a": {"t": "Push Square's roadmap budgets 250 hours or more, and says the platinum means seeing almost everything.", "s": [30]},
+     "b": {"t": "The earlier roadmap notes cluster around 200 hours. Polygon's pre-launch report, citing Insider Gaming, also said at least 200, with a story nearer 50 hours than the 60-80 the later guides use.", "s": [1, 5, 11, 40]},
+     "call": "Plan on at least 200, and treat 250 as the high published estimate. Polygon's 50-hour story figure was a pre-launch leak and sits under the post-launch ranges."
+    },
+    {
+     "q": "Does 100% completion hand you the platinum?",
+     "a": {"t": "Eurogamer says finishing the 100% checklist is what awards the PlayStation platinum.", "s": [27]},
+     "b": {"t": "Push Square says 100% will likely leave some gameplay challenges still open, and the earlier platinum notes still require the stranger strands and secret pops after the checklist.", "s": [30, 1, 5]},
+     "call": "Do not stop at the 100% gold. Eurogamer collapses two awards. Push Square and the earlier roadmaps keep leftover trophies after the checklist."
+    },
+    {
+     "q": "Are any trophies missable?",
+     "a": {"t": "Push Square's roadmap header says no missable trophies are known yet.", "s": [30]},
+     "b": {"t": "The earlier missables notes still flag Lucia's Chapter 1 balcony meditation, and hourglass jobs such as Race Against Yago, as windows that can close.", "s": [7, 19, 1]},
+     "call": "Do the balcony scene and any hourglass job when it appears. Push Square had not confirmed a missable; the earlier pages name specific ones."
     }
    ],
-   "guide": "Earn the other 54 trophies in one offline playthrough; nothing online is required. [1][5][14] Plan on about 200 hours, most of it after a 60-80 hour story. [1][5][22] Keep manual saves at chapter boundaries because there is no mission replay, and leave cheats off. [1][11][21] Do Lucia's Chapter 1 balcony meditation and any hourglass job as soon as it appears. [1][7][19] After The End of the Road, free roam remains and the 100% list opens under Progress > Stats. [2][12] Clear that list, then the stranger strands and secret pops, and the platinum should follow. [1][5]"
+   "guide": "Earn the other 54 trophies in one offline playthrough; nothing online is required. [1][5][14] Plan on at least 200 hours, most of it after a 60-80 hour story. Push Square's roadmap goes to 250 or more. [1][5][22][30] Keep manual saves at chapter boundaries because there is no mission replay. Leave cheats off: Rock Paper Shotgun says they block trophies and saving until you reload, and Push Square says Accessible Combat does not. [1][11][21][30][33] Do Lucia's Chapter 1 balcony meditation and any hourglass job as soon as it appears, even though Push Square had not yet named a missable. [1][7][19][30] After The End of the Road, free roam remains and the 100% list opens under Progress > Stats. [2][12] Clearing that list is not the platinum. Eurogamer treats 100% as the platinum, but Push Square still leaves gameplay challenges, and the stranger strands and secret pops come after the checklist. [1][5][27][30]"
   },
   {
    "id": 2,
@@ -61,12 +80,14 @@
    "steps": [
     {"t": "Finish the prologue stick-up, then start Chapter 1 when the Just Like Paradise title card appears.", "s": [3, 17, 21]},
     {"t": "Play Gone Fishing as Jason: the boat run in the Keys, the Kingfishers camp, and the flight out.", "s": [3, 21]},
-    {"t": "The bronze should unlock when that mission ends. It is the first story trophy and is not optional.", "s": [1, 25]}
+    {"t": "The bronze should unlock when that mission ends. It is the first story trophy and is not optional.", "s": [1, 25]},
+    {"t": "Ease off at each of the three water drops so Cal can hook the package, free Donnie from the shack by the camp's west turbine, then fly the seaplane into Brian's marina. The bronze pops after you drive Cal home and go inside, not at the landing.", "s": [42]}
    ],
    "claims": [
     {"t": "Gone Fishing is the first main mission of Chapter 1, after a separate prologue.", "s": [3, 17, 21]},
     {"t": "The trophy is hidden on PlayStation until earned.", "s": [11, 14, 25]},
-    {"t": "It is story-locked and cannot be missed if you continue the campaign.", "s": [1, 25]}
+    {"t": "It is story-locked and cannot be missed if you continue the campaign.", "s": [1, 25]},
+    {"t": "Push Square and Fextralife both treat it as a story unlock and leave the published line as Complete Gone Fishing.", "s": [30, 38]}
    ],
    "guide": "Finish Gone Fishing, the opening Chapter 1 mission after the prologue. [3][17][21] The bronze is hidden until it pops, and it cannot be missed if you keep playing the story. [1][11][25]"
   },
@@ -89,13 +110,15 @@
    "steps": [
     {"t": "Play Chapter 1 through to Tourist Trap. That mission locks free roam and runs straight into Home Sweet Home and Discharge Time.", "s": [3, 21]},
     {"t": "Before you start Tourist Trap, bank cash you care about and do the balcony meditation, because the house and carried money are lost.", "s": [6, 19, 21]},
-    {"t": "Continue into Chapter 2. The chapter bronze is reported to unlock once What's in the Bag?, the first Chapter 2 mission, is done.", "s": [1, 25]}
+    {"t": "Continue into Chapter 2. The chapter bronze is reported to unlock once What's in the Bag?, the first Chapter 2 mission, is done.", "s": [1, 25]},
+    {"t": "Eurogamer's locked ending is Tourist Trap, then Home Sweet Home as Lucia, then Discharge Time out of the hospital, with no free-roam break in that stretch.", "s": [28]}
    ],
    "claims": [
     {"t": "MyGTA titles Chapter 1 Just Like Paradise and Chapter 2 Paradise Lost, which matches this trophy name landing at the chapter change.", "s": [17]},
     {"t": "PowerPyx and GTABase say the bronze unlocks after What's in the Bag?, not on Discharge Time itself.", "s": [1, 25]},
     {"t": "Starting Tourist Trap is a point of no return: Jason's house and carried cash are lost.", "s": [19, 21]},
-    {"t": "The trophy is hidden.", "s": [11, 14, 25]}
+    {"t": "The trophy is hidden.", "s": [11, 14, 25]},
+    {"t": "MetaForge says starting Tourist Trap also deletes the Chapter 1 side jobs, not only the house and the cash you are carrying, so a separate save is the only way back.", "s": [41]}
    ],
    "guide": "Finish Chapter 1. The last stretch, Tourist Trap through Discharge Time, takes the house and the cash you are carrying, so bank money and do the balcony meditation first. [19][21] The bronze is hidden and is reported to pop after What's in the Bag?, the first mission of Chapter 2. [1][25]"
   },
@@ -118,12 +141,22 @@
    "steps": [
     {"t": "Work through Chapter 2, including Moses, Daily Driver, Breakfast Run and Coffee Break, which is when free switching between Jason and Lucia opens.", "s": [3, 21]},
     {"t": "Checking Out ends the chapter and removes the Starlet Motel as a safehouse, so use it before you leave.", "s": [19, 21]},
-    {"t": "Start Chapter 3. PowerPyx and GTABase say the bronze unlocks after Welcome to Vice City.", "s": [1, 25]}
+    {"t": "Start Chapter 3. PowerPyx and GTABase say the bronze unlocks after Welcome to Vice City.", "s": [1, 25]},
+    {"t": "Before Checking Out, Eurogamer's Coffee Break objectives ask you to bank $15,000 for the move and move $100,000 into family savings.", "s": [28]}
    ],
    "claims": [
     {"t": "The official name keeps the asterisks; it is not spelled out on the trophy list.", "s": [9, 10, 13]},
     {"t": "Chapter 2's last main mission on the walkthrough lists is Checking Out.", "s": [3, 17]},
-    {"t": "The bronze is hidden and is tied to the start of Chapter 3 rather than the motel cutscene alone.", "s": [1, 11, 25]}
+    {"t": "The bronze is hidden and is tied to the start of Chapter 3 rather than the motel cutscene alone.", "s": [1, 11, 25]},
+    {"t": "Fextralife and Rock Paper Shotgun both print the name with the asterisks and the description Complete Chapter 2.", "s": [32, 38]}
+   ],
+   "disputes": [
+    {
+     "q": "Is Welcome to Vice City the last job of Chapter 2 or the first of Chapter 3?",
+     "a": {"t": "Eurogamer's walkthrough table still files Welcome to Vice City under Chapter 2, right after Checking Out.", "s": [28]},
+     "b": {"t": "MetaForge opens Chapter 3 with Welcome to Vice City, and the earlier mission lists close Chapter 2 on Checking Out.", "s": [41, 3, 17]},
+     "call": "Treat Checking Out as the chapter end. Eurogamer's table stops at that handover and has not been extended, while MetaForge and the older lists agree on the split."
+    }
    ],
    "guide": "Finish Chapter 2, which the mission lists close with Checking Out and the loss of the Starlet Motel safehouse. [3][19][21] The hidden bronze is reported to pop after Welcome to Vice City, the first mission of Chapter 3. [1][25] The published name keeps the asterisks. [9][13]"
   },
@@ -175,12 +208,14 @@
    "steps": [
     {"t": "Play Chapter 4 through Child's Play, Headliners, VCIA Takedown and the closing missions.", "s": [3, 17]},
     {"t": "Do the optional That's Where The Money Is while it is marked if you want bank vaults unlocked before the chapter ends.", "s": [1, 2]},
-    {"t": "Finish Starting From Zero. PowerPyx ties this bronze to that mission.", "s": [1]}
+    {"t": "Finish Starting From Zero. PowerPyx ties this bronze to that mission.", "s": [1]},
+    {"t": "MetaForge ends Chapter 4 on Starting From Zero and starts Chapter 5 as a separate ten-mission list, so this bronze is not the last story pop.", "s": [41]}
    ],
    "claims": [
     {"t": "Walkthrough lists put Starting From Zero at the end of Chapter 4, with Chapter 5 still to come.", "s": [3, 17]},
     {"t": "MyGTA titles Chapter 5 Top of the World, Ma, so the chapter bronze may surface as that chapter begins.", "s": [17]},
-    {"t": "The trophy is hidden.", "s": [11, 14, 25]}
+    {"t": "The trophy is hidden.", "s": [11, 14, 25]},
+    {"t": "Push Square, Fextralife and Rock Paper Shotgun all keep the published description as Complete Chapter 4 and file the unlock as part of the story.", "s": [30, 32, 38]}
    ],
    "disputes": [
     {
@@ -188,6 +223,12 @@
      "a": {"t": "PowerPyx's trophy page says both this bronze and You Gotta Know When to Get Off unlock after Starting From Zero.", "s": [1]},
      "b": {"t": "Output Lag says the gold pops on the Story Complete screen after The End of the Road, a Chapter 5 mission, and the walkthrough lists keep Starting From Zero in Chapter 4.", "s": [3, 12, 17]},
      "call": "Treat this bronze as the Chapter 4 clear. Do not assume the gold has popped just because this one has."
+    },
+    {
+     "q": "Does Rock Paper Shotgun's Chapter 5 wording make this bronze the gold finale?",
+     "a": {"t": "Rock Paper Shotgun prints You Gotta Know When to Get Off as Complete Chapter 5, which would fold the finale into a chapter clear.", "s": [32]},
+     "b": {"t": "Fextralife and Push Square keep that gold as Complete the final mission, and MetaForge still lists ten Chapter 5 missions after Starting From Zero.", "s": [30, 38, 41]},
+     "call": "Do not stop when this bronze pops. The Chapter 5 line on the Rock Paper Shotgun list does not match the other published descriptions."
     }
    ],
    "guide": "Finish Chapter 4. The walkthrough lists close it with Starting From Zero, and Chapter 5 is still ahead. [3][17] The bronze is hidden. [11][25] PowerPyx also ties the gold finale trophy to that same mission, but the endings guide and the mission lists put the real finale later, so do not stop here. [1][12]"
@@ -249,12 +290,14 @@
    "steps": [
     {"t": "Advance Chapter 2 until Breakfast Run is on the map, listed as Check on Jason.", "s": [1, 3]},
     {"t": "Play it through. It sits just before Coffee Break on the mission lists.", "s": [3, 17]},
-    {"t": "The hidden bronze unlocks during the mission and cannot be skipped if you are finishing the chapter.", "s": [1, 25]}
+    {"t": "The hidden bronze unlocks during the mission and cannot be skipped if you are finishing the chapter.", "s": [1, 25]},
+    {"t": "Eurogamer describes the job as a shared breakfast that turns into a long run of robberies, not a short check-in on Jason.", "s": [28]}
    ],
    "claims": [
     {"t": "Breakfast Run is a Chapter 2 main mission, not a stranger strand.", "s": [3, 17, 25]},
     {"t": "Output Lag says character switching opens right after this mission; Leonidex and PowerPyx name the following mission, Coffee Break.", "s": [1, 11, 21]},
-    {"t": "The trophy is hidden.", "s": [11, 14, 25]}
+    {"t": "The trophy is hidden.", "s": [11, 14, 25]},
+    {"t": "MetaForge slots Breakfast Run as Chapter 2 mission 14, immediately before Coffee Break, and Push Square still files the bronze as a plain story unlock.", "s": [41, 30]}
    ],
    "guide": "Finish Breakfast Run, the Chapter 2 mission marked Check on Jason. [1][3] It sits just before Coffee Break, and the hidden bronze pops as you play it. [1][17][25]"
   },
@@ -277,12 +320,14 @@
    "steps": [
     {"t": "In Chapter 3, follow the Cartel Heist steps: scope Sinfrontera National Bank, the planning missions, then the heist itself.", "s": [3, 17]},
     {"t": "Play the heist when Raul's contact puts it on the map. It is a required story mission.", "s": [1, 3]},
-    {"t": "The hidden bronze unlocks during the mission.", "s": [1, 25]}
+    {"t": "The hidden bronze unlocks during the mission.", "s": [1, 25]},
+    {"t": "MetaForge breaks the story heist into a Sinfrontera scope, a practice safe, explosives prep, and only then a start-the-heist marker.", "s": [41]}
    ],
    "claims": [
     {"t": "The Cartel Heist is a Chapter 3 main mission, late in that chapter.", "s": [1, 3, 17]},
     {"t": "It is separate from the later free-roam bank-vault robberies, which unlock in Chapter 4.", "s": [1, 2]},
-    {"t": "The trophy is hidden.", "s": [11, 14, 25]}
+    {"t": "The trophy is hidden.", "s": [11, 14, 25]},
+    {"t": "Fextralife keeps the description as Complete The Cartel Heist, and Rock Paper Shotgun treats the 22 later bank jobs as a separate 100% line that opens after Credit Check.", "s": [38, 31]}
    ],
    "guide": "Finish The Cartel Heist, the Chapter 3 story job built around Sinfrontera National Bank. [1][3][17] It is not the same as the later vault robberies. [1][2] The bronze is hidden and pops as you complete the mission. [1][25]"
   },
@@ -305,12 +350,14 @@
    "steps": [
     {"t": "In Chapter 4, follow the Jason-side lead through Rafa's kidnapping until Child's Play is available.", "s": [3, 17]},
     {"t": "Play Child's Play, marked as rescuing Rafa from the kidnappers.", "s": [1, 3]},
-    {"t": "The hidden bronze unlocks during that mission.", "s": [1, 25]}
+    {"t": "The hidden bronze unlocks during that mission.", "s": [1, 25]},
+    {"t": "On MetaForge's Chapter 4 list, Child's Play follows the Jason-only kidnapping marker and comes before the airport heist is allowed to start.", "s": [41]}
    ],
    "claims": [
     {"t": "Child's Play is a Chapter 4 main mission.", "s": [1, 3, 17]},
     {"t": "The trophy is hidden.", "s": [11, 14, 25]},
-    {"t": "It is unmissable if you finish the chapter.", "s": [1, 25]}
+    {"t": "It is unmissable if you finish the chapter.", "s": [1, 25]},
+    {"t": "Rock Paper Shotgun rates it a hidden 15 G bronze, the same band as Headliners, and Fextralife keeps the description Complete Child's Play.", "s": [32, 38]}
    ],
    "guide": "Finish Child's Play, the Chapter 4 mission to rescue Rafa. [1][3] The bronze is hidden and pops as the mission ends. [1][11][25]"
   },
@@ -333,12 +380,14 @@
    "steps": [
     {"t": "Advance the Chapter 4 party and security jobs until Headliners is marked.", "s": [3, 17]},
     {"t": "Play Headliners, the launch-party job.", "s": [1, 3]},
-    {"t": "The hidden bronze unlocks during the mission.", "s": [1, 25]}
+    {"t": "The hidden bronze unlocks during the mission.", "s": [1, 25]},
+    {"t": "MetaForge places Headliners after the launch-party security work and before the airport heist marker, so finish the party job even if the heist prep is already done.", "s": [41]}
    ],
    "claims": [
     {"t": "Headliners is a Chapter 4 main mission, separate from VCIA Takedown.", "s": [1, 3, 17]},
     {"t": "The trophy is hidden.", "s": [11, 14, 25]},
-    {"t": "It cannot be skipped if you are completing Chapter 4.", "s": [1, 25]}
+    {"t": "It cannot be skipped if you are completing Chapter 4.", "s": [1, 25]},
+    {"t": "Push Square files it as a story unlock, and both Fextralife and Rock Paper Shotgun keep the published description Complete Headliners.", "s": [30, 32, 38]}
    ],
    "guide": "Finish Headliners, the Chapter 4 launch-party mission. [1][3] The bronze is hidden and pops during that job. [1][25]"
   },
@@ -361,12 +410,14 @@
    "steps": [
     {"t": "Work the VCIA Takedown prep missions in Chapter 4, split between Jason and Lucia.", "s": [3, 17]},
     {"t": "Start the airport heist when the plans are in place.", "s": [1, 3]},
-    {"t": "Finish the mission. The hidden bronze unlocks during it.", "s": [1, 25]}
+    {"t": "Finish the mission. The hidden bronze unlocks during it.", "s": [1, 25]},
+    {"t": "MetaForge's prep chain includes an airport scope, a stolen catering truck and bodybuilder surveillance before the VCIA Takedown start marker appears.", "s": [41]}
    ],
    "claims": [
     {"t": "VCIA Takedown is a Chapter 4 story mission, not the free-roam plane theft.", "s": [1, 3, 11]},
     {"t": "The free-roam jet theft is a different trophy, Catch Me If You Can.", "s": [1, 11]},
-    {"t": "The trophy is hidden.", "s": [11, 14, 25]}
+    {"t": "The trophy is hidden.", "s": [11, 14, 25]},
+    {"t": "TheGamer says Vice City International is no longer an instant five-star zone if you stay out of security's way. Rock Paper Shotgun still lists this bronze separately from the free-roam jet theft.", "s": [37, 32]}
    ],
    "guide": "Finish the story mission VCIA Takedown, the Chapter 4 airport heist. [1][3] Stealing a jet from a boarding bridge later is a different bronze. [1][11] This one is hidden and pops during the mission. [1][25]"
   },
@@ -389,12 +440,14 @@
    "steps": [
     {"t": "Start Chapter 5 after Starting From Zero and play through to Operation Savage Glory.", "s": [3, 17]},
     {"t": "Complete that mission. It is not the last mission of the game.", "s": [1, 3, 17]},
-    {"t": "The hidden bronze unlocks during the mission.", "s": [1, 25]}
+    {"t": "The hidden bronze unlocks during the mission.", "s": [1, 25]},
+    {"t": "MetaForge puts Operation Savage Glory fifth in a ten-mission Chapter 5, with Protective Custody and The End of the Road still after it.", "s": [41]}
    ],
    "claims": [
     {"t": "Operation Savage Glory sits in Chapter 5, ahead of Protective Custody and The End of the Road.", "s": [3, 17, 25]},
     {"t": "The trophy is hidden.", "s": [11, 14, 25]},
-    {"t": "It is a required story mission, so it is not a free-roam cleanup item.", "s": [1, 25]}
+    {"t": "It is a required story mission, so it is not a free-roam cleanup item.", "s": [1, 25]},
+    {"t": "Rock Paper Shotgun lists it as a hidden 25 G bronze, the same Gamerscore band as Hi-Jacked and Break the Bank, and Fextralife keeps the description Complete Operation Savage Glory.", "s": [32, 38]}
    ],
    "guide": "Finish Operation Savage Glory, a Chapter 5 story mission that comes before the finale. [1][3][17] The bronze is hidden and pops as you complete it. [1][25]"
   },
@@ -438,6 +491,12 @@
      "a": {"t": "PowerPyx's 100% intro says scan any 200 of 557 vehicles.", "s": [2]},
      "b": {"t": "The same page's checklist, plus KeenGamer and MyGTA, say 200 of 277 base models. PowerPyx later says 280 standout vehicles do not count.", "s": [2, 5, 16]},
      "call": "Scan base models until the checklist reads 200 of 277. The 557 figure is the two pools added together."
+    },
+    {
+     "q": "Does 100% want every collectible set, or only a share?",
+     "a": {"t": "Eurogamer's table marks card sets, Kenton sets, magazines, meditation spots, cocaine flamingos and unique races as All, and it prints both golf locations plus $100,000 in marked bills.", "s": [27]},
+     "b": {"t": "Rock Paper Shotgun prints partial caps instead, including 15 of 18 card sets, 5 of 7 Kenton sets, 30 of 34 magazines, 15 of 18 meditations, 100 of 125 flamingos and $250,000 marked bills. Push Square agrees on the 15-of-18 card cap, and PowerPyx already used that card cap, the flamingo cap and the $250,000 figure.", "s": [31, 30, 2]},
+     "call": "Use the partial caps. Eurogamer's All column matches the unfinished tables more than the checklists that print denominators, and the in-game list is the tie-break."
     }
    ],
    "guide": "Reach the in-game 100% checklist, which opens after the story under Progress > Stats and already includes earlier work. [1][2][23] PlayStation tracks it out of 100. [13] You need every gang operation, bank job, payday loan, vault, underwater discovery, shooting-range gold, drone trial and Bret deck, but only a share of cards, stunts, challenges, vehicles and animals. [2][5][25] Ignore IGN's unfinished stick-up and marked-bill figures where they disagree, and scan 200 of 277 base vehicles, not 557. [2][16][23] Budget about 100 hours after the credits. [5]"
@@ -1059,12 +1118,14 @@
    "steps": [
     {"t": "Call your partner after Coffee Break, or right after Breakfast Run if the call is already there.", "s": [11, 21]},
     {"t": "Stick up three shops in a row without letting the wanted stars fade. A red heat zone alone does not keep the chain.", "s": [11, 14]},
-    {"t": "Wait about 30 seconds after the third shop. The pop is delayed.", "s": [11, 14]}
+    {"t": "Wait about 30 seconds after the third shop. The pop is delayed.", "s": [11, 14]},
+    {"t": "A solid red star means the chase is already over and units still have your description. A new stick-up in that state restores the old stars, so do not treat a red heat wash as the chain.", "s": [39]}
    ],
    "claims": [
     {"t": "The chain breaks if the stars drop, even if you are still in the red heat zone.", "s": [11, 14]},
     {"t": "The unlock can take about 30 seconds after the third shop.", "s": [11, 14]},
-    {"t": "The bronze is visible.", "s": [11, 14]}
+    {"t": "The bronze is visible.", "s": [11, 14]},
+    {"t": "Rock Paper Shotgun lists it as a visible 20 G bronze, and Fextralife separates an active white-star chase from the red heat that lingers after the stars drop.", "s": [32, 39]}
    ],
    "guide": "Rob three shops in a row with your partner while the wanted stars stay up. [11][14] A red heat zone without stars does not count. [14] Wait half a minute after the third shop before you assume it failed. [11][14] You need the partner call, which opens around Breakfast Run and Coffee Break. [11][21]"
   },
@@ -1087,12 +1148,14 @@
    "steps": [
     {"t": "Hold up on the d-pad to open WAiNK, then R1, and scan traffic, boats and aircraft as you travel.", "s": [1, 2]},
     {"t": "Different regions spawn different models. Ocean Beach has supercars, Port Gellhorn has vans and trucks, Key Lento has everyday cars.", "s": [2]},
-    {"t": "Stop at 100 for this bronze. Continue to 200 base models for 100%. Standout vehicles in fixed spots do not fill that line.", "s": [2, 14]}
+    {"t": "Stop at 100 for this bronze. Continue to 200 base models for 100%. Standout vehicles in fixed spots do not fill that line.", "s": [2, 14]},
+    {"t": "Open WAiNK on the phone and hold R1 to highlight a vehicle. Lock, alarm, tracker and sale value show before the engine is on, and the vehicle hub treats that scan as the way to read a car before you keep it.", "s": [36, 34]}
    ],
    "claims": [
     {"t": "PlayStation tracks 100 discoveries.", "s": [13]},
     {"t": "100% wants 200 of 277 base models. PowerPyx says 280 standout vehicles do not count.", "s": [2, 5, 16]},
-    {"t": "The bronze is visible.", "s": [11, 14]}
+    {"t": "The bronze is visible.", "s": [11, 14]},
+    {"t": "Rock Paper Shotgun's checklist still wants 200 of 277 base models after this bronze's 100. Eurogamer's shorter table prints only the 200 target and does not mention the 277 pool.", "s": [31, 27]}
    ],
    "guide": "Discover 100 vehicles by scanning them with WAiNK. PlayStation tracks 100. [1][13] Keep going to 200 of 277 base models for 100%, and skip the 280 standout cars. [2][5][16] Scan boats and aircraft too. [1]"
   },
@@ -1144,12 +1207,14 @@
    "steps": [
     {"t": "Save, then enter the airfield. Planes parked out on the apron do not count.", "s": [1, 11]},
     {"t": "Use the jet at gates E3 and E4. Stairs by the boarding bridge lead into the plane.", "s": [1, 11, 14]},
-    {"t": "Go upstairs, reverse off the bridge, take off, and fly about 1 km from the airport. The pop is delayed.", "s": [1, 11, 14]}
+    {"t": "Go upstairs, reverse off the bridge, take off, and fly about 1 km from the airport. The pop is delayed.", "s": [1, 11, 14]},
+    {"t": "Do not substitute a Mile Zero fighter. Those jets sit on the military runway and pull a five-star wanted level, which is a different theft from a docked airliner.", "s": [35]}
    ],
    "claims": [
     {"t": "The jet has to be connected to a passenger boarding bridge.", "s": [1, 11, 14]},
     {"t": "The unlock waits until you are about 1 km from the airport.", "s": [1, 11]},
-    {"t": "The trophy is hidden, and it is not the story mission VCIA Takedown.", "s": [1, 11, 14]}
+    {"t": "The trophy is hidden, and it is not the story mission VCIA Takedown.", "s": [1, 11, 14]},
+    {"t": "TheGamer says you can take big and small planes from Vice City International if you stay clear of security, and that it is no longer an instant five-star zone. GameRant's fighter-jet spot at Mile Zero is a different theft.", "s": [37, 35]}
    ],
    "guide": "Steal a passenger jet docked at a VCIA boarding bridge, not one parked on the apron. [1][11] Gates E3 and E4 are the easy pair. [1][14] Take off and fly about a kilometre before the hidden bronze pops. [1][11]"
   },
@@ -1172,12 +1237,14 @@
    "steps": [
     {"t": "Save, then go to Mile Zero Air Station in Mariana County, the island at the southwest edge.", "s": [1, 11]},
     {"t": "The tanks sit in the south of the base. Drive through the gate or use the stunt jump by the southeast entrance.", "s": [1]},
-    {"t": "Get in and shoot enemies until the hidden bronze unlocks.", "s": [1, 11]}
+    {"t": "Get in and shoot enemies until the hidden bronze unlocks.", "s": [1, 11]},
+    {"t": "The base is open after Jason's first mission, but a five-star response and extra tanks show up if you linger on the runway, so save and leave fast.", "s": [35]}
    ],
    "claims": [
     {"t": "The tanks are at Mile Zero Air Station, which Output Lag places on Goose Key.", "s": [1, 11]},
     {"t": "Getting in is not enough on PowerPyx's account; you fire until it pops.", "s": [1]},
-    {"t": "The trophy is hidden.", "s": [11, 14, 25]}
+    {"t": "The trophy is hidden.", "s": [11, 14, 25]},
+    {"t": "TheGamer tells ordinary pilots to skip Mile Zero because the garrison stays dangerous late. Rock Paper Shotgun's Rhino cheat cannot stand in: using any cheat turns trophies off until you reload.", "s": [37, 33]}
    ],
    "guide": "Steal a Rhino at Mile Zero Air Station and shoot until the hidden bronze pops. [1][11] The tanks are in the south of the base. [1] Save first. [11]"
   },
@@ -1259,12 +1326,14 @@
    "steps": [
     {"t": "Play That's Where The Money Is. Tailing the van into a large bank and robbing the vault counts as this bronze.", "s": [1, 25]},
     {"t": "To do it sooner, block a van, stick a bomb on the rear doors, and blow them. Sticky bombs are in the back of Yasmani's shop after his Chapter 3 jobs.", "s": [1, 25]},
-    {"t": "Leave the red heat zone. The flashing search ring is not enough.", "s": [11, 14]}
+    {"t": "Leave the red heat zone. The flashing search ring is not enough.", "s": [11, 14]},
+    {"t": "The getaway is finished only when you drive clear of the red-shaded district. Flashing search rings are the searching state, not a cleared escape.", "s": [39]}
    ],
    "claims": [
     {"t": "The vault tutorial counts as the armored-truck robbery if you then leave the red heat zone or reach a Pay 'n' Spray.", "s": [1, 25]},
     {"t": "The earlier bomb method uses Yasmani's sticky bombs, unlocked from his Chapter 3 jobs.", "s": [1, 25]},
-    {"t": "The bronze is visible, and the pop waits until you leave the red heat zone.", "s": [11, 14]}
+    {"t": "The bronze is visible, and the pop waits until you leave the red heat zone.", "s": [11, 14]},
+    {"t": "MetaForge lists That's Where The Money Is as a Chapter 4 optional, and Rock Paper Shotgun says the eight vaults stay locked until that cafe wait.", "s": [41, 31]}
    ],
    "guide": "Rob an armored truck and leave the red heat zone, or reach a Pay 'n' Spray. [11][14][25] The Chapter 4 vault tutorial counts, and so does blowing a van's rear doors with Yasmani's sticky bombs. [1][25] Clearing only the flashing search area is not enough. [11][14]"
   },
@@ -1287,12 +1356,14 @@
    "steps": [
     {"t": "Steal a plane and fly over every black patch on the map until the fog is gone.", "s": [1, 25]},
     {"t": "Watch the trophy counter. PlayStation tracks 52 areas, which is the figure the list uses for all of Leonida.", "s": [13]},
-    {"t": "Do this before a long collectible sweep. Unfogging also reveals activity and robbery icons.", "s": [1, 2]}
+    {"t": "Do this before a long collectible sweep. Unfogging also reveals activity and robbery icons.", "s": [1, 2]},
+    {"t": "The map is not chapter-locked the way older games were. A plane from the Port Gellhorn strip, or from the Southwind entrance near the Keys, can start the fog clear once you have one.", "s": [37]}
    ],
    "claims": [
     {"t": "PlayStation tracks 52.", "s": [13]},
     {"t": "Clearing the map fog, fastest by plane, is how both PowerPyx and GTABase describe the requirement.", "s": [1, 25]},
-    {"t": "The bronze is visible.", "s": [11, 14]}
+    {"t": "The bronze is visible.", "s": [11, 14]},
+    {"t": "TheGamer says the map is open from the start, so this exploration bronze is not chapter-gated. Rock Paper Shotgun separately locks a weather cheat behind revealing every region.", "s": [37, 33]}
    ],
    "guide": "Explore all of Leonida. PlayStation tracks 52 areas. [13] Fly a plane over the black fog until the map is clear. [1][25] That also reveals the activity and robbery icons you will need later. [1][2]"
   },
@@ -1345,18 +1416,20 @@
    "steps": [
     {"t": "Go to the Ocean View Rooftop Bar on Ocean Beach.", "s": [1]},
     {"t": "Buy an Apple Martini and drink it while standing next to the bar.", "s": [1]},
-    {"t": "If that does not pop, stop. KeenGamer, Output Lag and GTABase still say the exact trigger is unconfirmed.", "s": [5, 11, 25]}
+    {"t": "If that does not pop, stop. KeenGamer, Output Lag and GTABase still say the exact trigger is unconfirmed.", "s": [5, 11, 25]},
+    {"t": "If the Apple Martini does not pop, stop experimenting. Rock Paper Shotgun and Fextralife reprint the Ocean Beach cocktail line and still name no bar and no drink.", "s": [32, 38]}
    ],
    "claims": [
     {"t": "The trophy is hidden.", "s": [11, 14, 25]},
     {"t": "PowerPyx gives a specific bar and a specific drink.", "s": [1]},
-    {"t": "KeenGamer, Output Lag and GTABase all say the exact cocktail trigger was not confirmed when they published.", "s": [5, 11, 25]}
+    {"t": "KeenGamer, Output Lag and GTABase all say the exact cocktail trigger was not confirmed when they published.", "s": [5, 11, 25]},
+    {"t": "Rock Paper Shotgun rates it a hidden 5 G bronze. Fextralife reprints the same Ocean Beach description and also gives no drink.", "s": [32, 38]}
    ],
    "disputes": [
     {
      "q": "Is the Apple Martini at Ocean View Rooftop Bar confirmed?",
      "a": {"t": "PowerPyx says buy an Apple Martini there and drink it beside the bar.", "s": [1]},
-     "b": {"t": "KeenGamer, Output Lag and GTABase say the exact trigger is still unconfirmed. GTABase only restates the description.", "s": [5, 11, 25]},
+     "b": {"t": "KeenGamer, Output Lag and GTABase say the exact trigger is still unconfirmed. GTABase only restates the description. Rock Paper Shotgun and Fextralife reprint the cocktail line and still name no bar and no drink.", "s": [5, 11, 25, 32, 38]},
      "call": "Try the Apple Martini first. It is the only specific method on record, and it is cheap to test."
     }
    ],
@@ -1448,12 +1521,14 @@
    "steps": [
     {"t": "After Coffee Break, call your partner and buy a gym membership. Filter the map for fitness clubs.", "s": [1, 11]},
     {"t": "Work out with one character. The partner trains alongside you, so both bars move.", "s": [1, 11, 14]},
-    {"t": "Check Strength on each character under the Jason and Lucia menu. The hidden bronze pops when both are maxed together.", "s": [1, 11]}
+    {"t": "Check Strength on each character under the Jason and Lucia menu. The hidden bronze pops when both are maxed together.", "s": [1, 11]},
+    {"t": "A body-armor cheat is gated on 100 workouts, which is a separate counter from the paired Strength bars this bronze wants.", "s": [33]}
    ],
    "claims": [
     {"t": "You cannot start the paired workouts until switching is unlocked, which the guides place at Coffee Break or just after Breakfast Run.", "s": [1, 11, 21]},
     {"t": "After the story you can also train at home.", "s": [1]},
-    {"t": "The trophy is hidden.", "s": [11, 14, 25]}
+    {"t": "The trophy is hidden.", "s": [11, 14, 25]},
+    {"t": "Eurogamer's August preview already showed partner weightlifting, and warned that list could change. Rock Paper Shotgun's post-launch list still keeps the hidden partnership description.", "s": [29, 32]}
    ],
    "guide": "Max Strength on both Jason and Lucia at once. [1][11] Call your partner to a gym after Coffee Break so the idle character trains too. [1][14][21] The bronze is hidden. [14][25]"
   },
@@ -1580,18 +1655,20 @@
    "steps": [
     {"t": "Get on any bike in a crowd, such as Vice City or Ocean Beach.", "s": [1]},
     {"t": "Kick pedestrians with Square. PowerPyx wants 10 kicks inside 60 seconds.", "s": [1]},
-    {"t": "If it does not pop, do not invent a bowling-alley melee. KeenGamer, Output Lag and GTABase had not confirmed a count, and GTABase only reads the description as a melee hit from a vehicle.", "s": [5, 11, 25]}
+    {"t": "If it does not pop, do not invent a bowling-alley melee. KeenGamer, Output Lag and GTABase had not confirmed a count, and GTABase only reads the description as a melee hit from a vehicle.", "s": [5, 11, 25]},
+    {"t": "Do not switch to a bowling-alley melee. Rock Paper Shotgun and Fextralife keep that alley as a separate hidden trophy.", "s": [32, 38]}
    ],
    "claims": [
     {"t": "PowerPyx's count is 10 kicks in 60 seconds from a bike.", "s": [1]},
     {"t": "GTABase reads the description as a melee attack from a vehicle, which fits a bike kick, but does not confirm a count.", "s": [1, 25]},
-    {"t": "The trophy is hidden.", "s": [11, 14, 25]}
+    {"t": "The trophy is hidden.", "s": [11, 14, 25]},
+    {"t": "Rock Paper Shotgun and Fextralife print the melee drive-by description and still give no count, no timer and no weapon, so they do not confirm the 10-kick recipe.", "s": [32, 38]}
    ],
    "disputes": [
     {
      "q": "Is the 10-kick bike method confirmed?",
      "a": {"t": "PowerPyx says kick 10 pedestrians from any bike within 60 seconds, in a crowd.", "s": [1]},
-     "b": {"t": "KeenGamer, Output Lag and GTABase say the precise method was still unconfirmed at launch.", "s": [5, 11, 25]},
+     "b": {"t": "KeenGamer, Output Lag and GTABase say the precise method was still unconfirmed at launch. Rock Paper Shotgun and Fextralife reprint the melee drive-by line and still give no count.", "s": [5, 11, 25, 32, 38]},
      "call": "Try the timed bike kicks. It matches the description, and nothing else specific has been published."
     }
    ],
@@ -1646,12 +1723,14 @@
    "steps": [
     {"t": "Buy guns, vehicle mods and tattoos until the counter hits $100,000. Clothes and hair count too, they are just slower.", "s": [1, 11]},
     {"t": "Do not spend the garage fund first if Little Boxes is still open. The eight garages cost about $160,000 together.", "s": [1, 14]},
-    {"t": "The total is cumulative across every shop type.", "s": [1, 11]}
+    {"t": "The total is cumulative across every shop type.", "s": [1, 11]},
+    {"t": "Eurogamer's 100% table never mentions the $100,000 shop spend, so clearing that page is not the same as finishing this bronze.", "s": [27]}
    ],
    "claims": [
     {"t": "PlayStation tracks 100000.", "s": [13]},
     {"t": "PowerPyx lists mod shops, Pay 'n' Sprays, Ammu-Nation, clothes, footwear, salons, tattoos and electronics as spending that counts.", "s": [1]},
-    {"t": "The bronze is visible.", "s": [11, 14]}
+    {"t": "The bronze is visible.", "s": [11, 14]},
+    {"t": "Rock Paper Shotgun lists this as a visible 15 G bronze and keeps the published $100,000 shop total. Fextralife prints the same description.", "s": [32, 38]}
    ],
    "guide": "Spend $100,000 across shops. PlayStation tracks 100000. [13] Guns, mods and tattoos are the fastest. [1][11] Hold back about $160,000 if you still need the eight garages. [1][14]"
   },
