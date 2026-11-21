@@ -4,7 +4,9 @@ import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-frontend.ts';
 
 // Hand the guide in: copy app/ and screenshots/ to the output directory, then write dossier.json.
+// Local handoff only: the guide stays on disk and never phones home.
 const repoRoot = fileURLToPath(new URL('.', import.meta.url));
+// Prefer MAKEFUN_OUTPUT_DIR when the runner sets it.
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 const appDir = join(repoRoot, 'app');
 const indexHtml = join(appDir, 'index.html');
