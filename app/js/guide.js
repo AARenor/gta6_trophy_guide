@@ -1,235 +1,222 @@
 import { gradeLetter } from "./filters.js";
-import { hiddenLabel, missableTag } from "./spoiler.js";
+import { concealedLabel, missableTag } from "./spoiler.js";
+
+export function renderCitations(text) {
+  const frag = document.createDocumentFragment();
+  const re = /\[(\d+)\]/g;
+  let last = 0;
+  let match;
+  while ((match = re.exec(text))) {
+    if (match.index > last) frag.append(text.slice(last, match.index));
+    frag.append(citeLink(match[1]));
+    last = match.index + match[0].length;
+  }
+  if (last < text.length) frag.append(text.slice(last));
+  return frag;
+}
 
 export function renderGuide(root, trophy, ctx) {
   root.replaceChildren();
-  root.append(head(trophy, ctx.earned));
-  root.append(officialBox(trophy));
-  root.append(tagRow(trophy));
-  if (typeof trophy.count === "number") root.append(counterBox(trophy, ctx));
-  if (trophy.window || missableTag(trophy)) root.append(windowBox(trophy));
-  if ((trophy.disputes || []).length) root.append(differBox(trophy, ctx));
-  root.append(stepsBox(trophy, ctx));
-  root.append(claimsBox(trophy, ctx));
-}
-
-export function renderCitations(ids, sources, onCite) {
-  const wrap = document.createElement("span");
-  wrap.className = "cites";
-  const byId = new Map((sources || []).map((source) => [source.id, source]));
-  for (const id of ids || []) {
-    const link = document.createElement("a");
-    link.className = "cite";
-    link.href = `#source-${id}`;
-    link.textContent = `[${id}]`;
-    const source = byId.get(id);
-    if (source) link.title = `${source.site}: ${source.title}`;
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      onCite(id);
-    });
-    wrap.append(link);
+  if (!trophy) {
+    const empty = document.createElement("p");
+    empty.className = "empty";
+    empty.textContent = "Select a trophy.";
+    root.append(empty);
+    return;
   }
-  return wrap;
+  if (ctx.concealed) {
+    renderSealed(root, trophy);
+    return;
+  }
+  root.append(head(trophy));
+  root.append(officialBox(trophy.description));
+  root.append(tagRow(trophy));
+  if (trophy.count != null) root.append(counter(trophy, ctx.count || 0));
+  if (trophy.window || (trophy.missable && trophy.missable !== "no")) root.append(windowBox(trophy));
+  for (const dispute of trophy.disputes || []) root.append(differPanel(dispute, ctx.sourceById));
+  root.append(stepsBlock(trophy));
+  root.append(claimsBlock(trophy));
 }
 
-export function renderSealed(root, trophy, onReveal) {
-  root.replaceChildren();
-  const box = document.createElement("div");
-  box.className = "sealed";
-  const kicker = document.createElement("p");
-  kicker.className = "kicker";
-  kicker.textContent = "Spoiler shield";
+export function renderSealed(root, trophy) {
+  const wrap = document.createElement("div");
+  wrap.className = "sealed";
+  const badge = gradeBadge(trophy.grade);
   const title = document.createElement("h2");
-  title.textContent = hiddenLabel(trophy);
-  const note = document.createElement("p");
-  note.textContent = "The name, the official description and the guide stay covered until you earn it, or until you reveal this one.";
+  title.textContent = concealedLabel(trophy);
   const button = document.createElement("button");
   button.type = "button";
   button.className = "reveal";
+  button.dataset.reveal = String(trophy.id);
   button.textContent = "Reveal this one";
-  button.addEventListener("click", () => onReveal(trophy));
-  box.append(kicker, title, note, button);
-  root.append(box);
+  wrap.append(badge, title, button);
+  root.append(wrap);
 }
 
-function head(trophy, earned) {
-  const row = document.createElement("header");
-  row.className = "g-head";
-  row.append(badge(trophy.grade));
+function head(trophy) {
+  const row = document.createElement("div");
+  row.className = "guide-head";
   const title = document.createElement("h2");
   title.textContent = trophy.name;
-  row.append(title);
-  const flag = missableTag(trophy);
-  if (flag) {
-    const tag = document.createElement("span");
-    tag.className = flag === "AT RISK" ? "flag risk" : "flag miss";
-    tag.textContent = flag;
-    row.append(tag);
-  }
-  const state = document.createElement("span");
-  state.className = earned ? "state on" : "state";
-  state.textContent = earned ? "Earned" : "Not earned";
-  row.append(state);
+  row.append(gradeBadge(trophy.grade), title);
   return row;
 }
 
-function officialBox(trophy) {
+function officialBox(description) {
   const box = document.createElement("blockquote");
   box.className = "official";
-  const kicker = document.createElement("p");
-  kicker.className = "kicker";
-  kicker.textContent = "Official description";
-  const text = document.createElement("p");
-  text.textContent = trophy.description;
-  box.append(kicker, text);
+  const label = document.createElement("span");
+  label.textContent = "Official description";
+  const quote = document.createElement("p");
+  quote.textContent = description;
+  box.append(label, quote);
   return box;
 }
 
 function tagRow(trophy) {
-  const list = document.createElement("ul");
-  list.className = "tags";
-  const tags = [
-    chapterTag(trophy.chapter),
-    `Stage ${trophy.stage}`,
-    ...(trophy.kinds || []),
-  ];
-  if (trophy.missable && trophy.missable !== "no") tags.push(trophy.missable);
-  for (const tag of tags) {
-    const item = document.createElement("li");
-    item.textContent = tag;
-    if (tag === "possibly" || tag === "yes" || tag === "at-risk" || tag === "missable") item.className = "hot";
-    list.append(item);
+  const row = document.createElement("div");
+  row.className = "tag-row";
+  for (const label of [trophy.chapter, "Stage " + trophy.stage, ...trophy.kinds]) {
+    row.append(tag(label, "tag"));
   }
-  return list;
+  const flag = missableTag(trophy.missable);
+  if (flag) row.append(tag(flag, trophy.missable === "at-risk" ? "tag tag-risk" : "tag tag-miss"));
+  return row;
 }
 
-function chapterTag(chapter) {
-  const value = chapter || "—";
-  if (value === "Any time" || value === "Post-story") return value;
-  return `Chapter · ${value}`;
-}
-
-function counterBox(trophy, ctx) {
+function counter(trophy, count) {
   const box = document.createElement("div");
   box.className = "counter";
-  const kicker = document.createElement("p");
-  kicker.className = "kicker";
-  kicker.textContent = "Tracked count";
-  const controls = document.createElement("div");
-  controls.className = "counter-row";
-  const down = document.createElement("button");
-  down.type = "button";
-  down.textContent = "−";
-  down.setAttribute("aria-label", "Decrease count");
-  down.disabled = ctx.countValue <= 0;
-  down.addEventListener("click", () => ctx.onCount(ctx.countValue - 1));
+  const label = document.createElement("span");
+  label.textContent = "Count";
+  const minus = document.createElement("button");
+  minus.type = "button";
+  minus.dataset.count = "-1";
+  minus.textContent = "−";
+  minus.setAttribute("aria-label", "Decrease count");
+  minus.disabled = count <= 0;
   const value = document.createElement("strong");
-  value.textContent = formatNum(ctx.countValue);
+  value.textContent = String(count);
   const of = document.createElement("span");
-  of.textContent = `/ ${formatNum(trophy.count)}`;
-  const up = document.createElement("button");
-  up.type = "button";
-  up.textContent = "+";
-  up.setAttribute("aria-label", "Increase count");
-  up.disabled = ctx.countValue >= trophy.count;
-  up.addEventListener("click", () => ctx.onCount(ctx.countValue + 1));
-  controls.append(down, value, of, up);
-  box.append(kicker, controls);
+  of.textContent = "/ " + trophy.count;
+  const plus = document.createElement("button");
+  plus.type = "button";
+  plus.dataset.count = "1";
+  plus.textContent = "+";
+  plus.setAttribute("aria-label", "Increase count");
+  plus.disabled = count >= trophy.count;
+  box.append(label, minus, value, of, plus);
   return box;
 }
 
 function windowBox(trophy) {
-  const box = document.createElement("div");
-  box.className = "window";
-  const kicker = document.createElement("p");
-  kicker.className = "kicker";
-  kicker.textContent = "Missable window";
+  const box = document.createElement("section");
+  box.className = "missable-window";
+  const title = document.createElement("h3");
+  title.textContent = "Missable window";
   const text = document.createElement("p");
-  text.textContent = trophy.window || "Sources flag this one, but they do not publish a narrower window.";
-  box.append(kicker, text);
-  if ((trophy.missions || []).length) {
-    const tied = document.createElement("p");
-    tied.className = "tied";
-    tied.textContent = `Tied to ${trophy.missions.join(", ")}`;
-    box.append(tied);
-  }
+  text.textContent = trophy.window || "Flagged " + trophy.missable + " in the file, with no window note stored.";
+  box.append(title, text);
   return box;
 }
 
-function differBox(trophy, ctx) {
-  const box = document.createElement("section");
-  box.className = "differ";
+function differPanel(dispute, sourceById) {
+  const panel = document.createElement("section");
+  panel.className = "sources-differ";
   const title = document.createElement("h3");
   title.textContent = "Sources differ";
-  box.append(title);
-  for (const dispute of trophy.disputes) {
-    const question = document.createElement("p");
-    question.className = "question";
-    question.textContent = dispute.q;
-    const pair = document.createElement("div");
-    pair.className = "pair";
-    pair.append(version("Version A", dispute.a, ctx), version("Version B", dispute.b, ctx));
-    const call = document.createElement("p");
-    call.className = "call";
-    const label = document.createElement("span");
-    label.className = "kicker";
-    label.textContent = "Our call";
-    call.append(label, document.createTextNode(` ${dispute.call}`));
-    box.append(question, pair, call);
+  const question = document.createElement("p");
+  question.className = "differ-q";
+  question.textContent = dispute.q;
+  panel.append(title, question, versionLine("Version A", dispute.a, sourceById), versionLine("Version B", dispute.b, sourceById));
+  const call = document.createElement("p");
+  call.className = "our-call";
+  const label = document.createElement("b");
+  label.textContent = "Our call. ";
+  call.append(label, dispute.call || "");
+  panel.append(call);
+  return panel;
+}
+
+function versionLine(label, side, sourceById) {
+  const p = document.createElement("p");
+  p.className = "version";
+  const strong = document.createElement("b");
+  strong.textContent = label + siteSuffix(side && side.s, sourceById);
+  p.append(strong, " " + ((side && side.t) || ""));
+  p.append(document.createTextNode(" "));
+  p.append(renderCitations(markers(side && side.s)));
+  return p;
+}
+
+function siteSuffix(ids, sourceById) {
+  if (!sourceById || !ids) return "";
+  const names = [];
+  for (const id of ids) {
+    const source = sourceById.get(id);
+    if (source && !names.includes(source.site)) names.push(source.site);
   }
-  return box;
+  return names.length ? " · " + names.join(", ") : "";
 }
 
-function version(label, side, ctx) {
-  const cell = document.createElement("div");
-  const kicker = document.createElement("p");
-  kicker.className = "kicker";
-  kicker.textContent = label;
-  const text = document.createElement("p");
-  text.textContent = side && side.t ? side.t : "";
-  cell.append(kicker, text, renderCitations(side && side.s, ctx.sources, ctx.onCite));
-  return cell;
-}
-
-function stepsBox(trophy, ctx) {
-  const box = document.createElement("section");
-  box.className = "steps";
+function stepsBlock(trophy) {
+  const section = document.createElement("section");
   const title = document.createElement("h3");
   title.textContent = "How to earn it";
   const list = document.createElement("ol");
+  list.className = "steps";
   for (const step of trophy.steps || []) {
     const item = document.createElement("li");
-    item.append(document.createTextNode(step.t), renderCitations(step.s, ctx.sources, ctx.onCite));
+    item.append(step.t);
+    item.append(" ");
+    item.append(renderCitations(markers(step.s)));
     list.append(item);
   }
-  box.append(title, list);
-  return box;
+  section.append(title, list);
+  return section;
 }
 
-function claimsBox(trophy, ctx) {
-  const box = document.createElement("section");
-  box.className = "claims";
+function claimsBlock(trophy) {
+  const section = document.createElement("section");
+  section.className = "claims";
   const title = document.createElement("h3");
   title.textContent = "Cited claims";
   const list = document.createElement("ul");
   for (const claim of trophy.claims || []) {
     const item = document.createElement("li");
-    item.append(document.createTextNode(claim.t), renderCitations(claim.s, ctx.sources, ctx.onCite));
+    item.append(claim.t);
+    item.append(" ");
+    item.append(renderCitations(markers(claim.s)));
     list.append(item);
   }
-  box.append(title, list);
-  return box;
+  section.append(title, list);
+  return section;
 }
 
-function badge(grade) {
-  const node = document.createElement("span");
-  node.className = `badge ${gradeLetter(grade).toLowerCase()}`;
-  node.textContent = gradeLetter(grade);
-  node.title = grade;
-  return node;
+function gradeBadge(grade) {
+  const badge = document.createElement("span");
+  badge.className = "badge b-" + grade;
+  badge.textContent = gradeLetter(grade);
+  badge.title = grade;
+  return badge;
 }
 
-function formatNum(value) {
-  return Number(value).toLocaleString("en-US");
+function tag(text, className) {
+  const span = document.createElement("span");
+  span.className = className;
+  span.textContent = text;
+  return span;
+}
+
+function citeLink(id) {
+  const link = document.createElement("a");
+  link.className = "cite";
+  link.href = "#source-" + id;
+  link.dataset.source = id;
+  link.textContent = "[" + id + "]";
+  return link;
+}
+
+function markers(ids) {
+  return (ids || []).map((id) => "[" + id + "]").join("");
 }

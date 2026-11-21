@@ -1,32 +1,18 @@
+import { spoilerShield, concealedLabel } from "./spoiler.js";
+
 export const FILTERS = [
-  ["all", "All"],
-  ["story", "Story"],
-  ["missable", "Missable"],
-  ["collectibles", "Collectibles"],
-  ["activities", "Activities"],
-  ["side", "Side"],
-  ["crime", "Crime"],
-  ["hidden", "Hidden"],
-  ["remaining", "Not earned"],
+  { id: "all", label: "All" },
+  { id: "story", label: "Story" },
+  { id: "missable", label: "Missable" },
+  { id: "collectibles", label: "Collectibles" },
+  { id: "activities", label: "Activities" },
+  { id: "side", label: "Side" },
+  { id: "crime", label: "Crime" },
+  { id: "hidden", label: "Hidden" },
+  { id: "unearned", label: "Not earned" },
 ];
 
 export const GRADES = ["platinum", "gold", "silver", "bronze"];
-
-export function applyFilters(trophies, { kind, query, earned, textOf }) {
-  const needle = (query || "").trim().toLowerCase();
-  return trophies.filter((trophy) => {
-    if (!matchesKind(trophy, kind, earned)) return false;
-    if (!needle) return true;
-    return textOf(trophy).toLowerCase().includes(needle);
-  });
-}
-
-export function countByKind(trophies, earned) {
-  const counts = {};
-  for (const [key] of FILTERS) counts[key] = trophies.filter((trophy) => matchesKind(trophy, key, earned)).length;
-  for (const grade of GRADES) counts[grade] = trophies.filter((trophy) => trophy.grade === grade).length;
-  return counts;
-}
 
 export function gradeLetter(grade) {
   if (grade === "platinum") return "P";
@@ -36,21 +22,50 @@ export function gradeLetter(grade) {
   return "?";
 }
 
-export function matchesKind(trophy, kind, earned) {
-  const kinds = trophy.kinds || [];
-  if (!kind || kind === "all") return true;
-  if (kind === "story") return kinds.includes("story");
-  if (kind === "missable") return isMissable(trophy);
-  if (kind === "collectibles") return kinds.includes("collectibles");
-  if (kind === "activities") return kinds.includes("activities");
-  if (kind === "side") return kinds.includes("side");
-  if (kind === "crime") return kinds.includes("crime");
-  if (kind === "hidden") return trophy.hidden === true;
-  if (kind === "remaining") return !earned.has(trophy.name);
-  if (GRADES.includes(kind)) return trophy.grade === kind;
+export function primaryKind(trophy) {
+  const order = ["story", "collectibles", "activities", "side", "crime", "completion"];
+  for (const kind of order) {
+    if (trophy.kinds.includes(kind)) return kind;
+  }
+  return trophy.kinds[0] || "";
+}
+
+export function applyFilters(trophies, state) {
+  const query = (state.query || "").trim().toLowerCase();
+  return trophies.filter((trophy) => {
+    if (!matchesKind(trophy, state.filter, state)) return false;
+    if (state.grade && state.grade !== "all" && trophy.grade !== state.grade) return false;
+    if (!query) return true;
+    return haystack(trophy, state).includes(query);
+  });
+}
+
+export function countByKind(trophies, state) {
+  const counts = {};
+  for (const filter of FILTERS) {
+    counts[filter.id] = trophies.filter((trophy) => matchesKind(trophy, filter.id, state)).length;
+  }
+  counts.grades = {};
+  for (const grade of GRADES) {
+    counts.grades[grade] = trophies.filter((trophy) => trophy.grade === grade).length;
+  }
+  return counts;
+}
+
+function matchesKind(trophy, filterId, state) {
+  if (filterId === "all" || !filterId) return true;
+  if (filterId === "story") return trophy.kinds.includes("story");
+  if (filterId === "missable") return trophy.missable !== "no" || trophy.kinds.includes("missable");
+  if (filterId === "collectibles") return trophy.kinds.includes("collectibles");
+  if (filterId === "activities") return trophy.kinds.includes("activities");
+  if (filterId === "side") return trophy.kinds.includes("side");
+  if (filterId === "crime") return trophy.kinds.includes("crime");
+  if (filterId === "hidden") return trophy.hidden === true;
+  if (filterId === "unearned") return !state.earned[trophy.id];
   return true;
 }
 
-function isMissable(trophy) {
-  return trophy.missable === "yes" || trophy.missable === "possibly" || trophy.missable === "at-risk" || (trophy.kinds || []).includes("missable");
+function haystack(trophy, state) {
+  if (spoilerShield(trophy, state)) return concealedLabel(trophy).toLowerCase();
+  return [trophy.name, trophy.description, trophy.chapter, ...(trophy.kinds || [])].join(" ").toLowerCase();
 }

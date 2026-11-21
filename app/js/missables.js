@@ -1,131 +1,101 @@
 import { gradeLetter } from "./filters.js";
-import { missableTag } from "./spoiler.js";
 import { renderCitations } from "./guide.js";
+import { windowChapter } from "./roadmap.js";
 
-export function renderMissables(root, trophies, ctx) {
-  const flagged = trophies.filter((trophy) => missableTag(trophy));
-  const rest = trophies.length - flagged.length;
-  const cites = availabilityCites(trophies);
+export function renderMissables(root, trophies) {
   root.replaceChildren();
+  const flagged = trophies
+    .filter((trophy) => trophy.missable === "yes" || trophy.missable === "possibly" || trophy.missable === "at-risk")
+    .slice()
+    .sort((a, b) => chapterRank(windowChapter(a)) - chapterRank(windowChapter(b)) || a.id - b.id);
   const head = document.createElement("header");
-  head.className = "miss-head";
+  head.className = "page-head";
   const title = document.createElement("h2");
-  title.textContent = "Missable windows";
-  const tally = document.createElement("p");
-  tally.className = "tally";
-  const yes = flagged.filter((trophy) => trophy.missable === "yes").length;
-  const possibly = flagged.filter((trophy) => trophy.missable === "possibly").length;
-  const risk = flagged.filter((trophy) => trophy.missable === "at-risk").length;
-  tally.textContent = `${yes} confirmed yes · ${possibly} possibly · ${risk} at risk · ${rest} not flagged`;
-  head.append(title, tally);
-  root.append(head, rail(flagged), cards(flagged, ctx), availability(rest, cites, ctx));
+  title.textContent = "Missables";
+  const note = document.createElement("p");
+  note.textContent = flagged.length + " trophies are stored as yes, possibly, or at-risk. Act before the window in the file closes.";
+  head.append(title, note);
+  const grid = document.createElement("div");
+  grid.className = "miss-grid";
+  for (const trophy of flagged) grid.append(card(trophy));
+  root.append(head, grid, remainder(trophies, flagged.length));
 }
 
-function rail(flagged) {
-  const row = document.createElement("ol");
-  row.className = "rail";
-  const chapters = [1, 2, 3, 4, 5];
-  for (const number of chapters) {
-    const item = document.createElement("li");
-    const hits = flagged.filter((trophy) => new RegExp(`Chapter ${number}`).test(trophy.window || ""));
-    item.className = hits.length ? "hot" : "";
-    const label = document.createElement("strong");
-    label.textContent = `Chapter ${number}`;
-    item.append(label);
-    if (!hits.length) {
-      const clear = document.createElement("span");
-      clear.textContent = "No window closes";
-      item.append(clear);
-    }
-    for (const trophy of hits) {
-      const name = document.createElement("span");
-      name.textContent = `${trophy.name} · ${trophy.missable}`;
-      item.append(name);
-    }
-    row.append(item);
-  }
-  const after = document.createElement("li");
-  const label = document.createElement("strong");
-  label.textContent = "After credits";
-  const note = document.createElement("span");
-  note.textContent = "Rest stay available";
-  after.append(label, note);
-  row.append(after);
-  return row;
-}
-
-function cards(flagged, ctx) {
-  const wrap = document.createElement("div");
-  wrap.className = "miss-cards";
-  for (const trophy of flagged) wrap.append(card(trophy, ctx));
-  return wrap;
-}
-
-function card(trophy, ctx) {
-  const node = document.createElement("article");
-  node.className = "window-card";
-  const head = document.createElement("header");
+function card(trophy) {
+  const article = document.createElement("article");
+  article.className = "miss-card";
+  const top = document.createElement("div");
+  top.className = "guide-head";
   const badge = document.createElement("span");
-  badge.className = `badge ${gradeLetter(trophy.grade).toLowerCase()}`;
+  badge.className = "badge b-" + trophy.grade;
   badge.textContent = gradeLetter(trophy.grade);
-  const title = document.createElement("h3");
-  title.textContent = trophy.name;
+  const name = document.createElement("h3");
+  name.textContent = trophy.name;
   const flag = document.createElement("span");
-  flag.className = trophy.missable === "at-risk" ? "flag risk" : "flag miss";
-  flag.textContent = missableTag(trophy);
-  head.append(badge, title, flag);
+  flag.className = trophy.missable === "at-risk" ? "tag tag-risk" : "tag tag-miss";
+  flag.textContent = trophy.missable === "at-risk" ? "AT RISK" : "MISSABLE";
+  top.append(badge, name, flag);
   const official = document.createElement("blockquote");
   official.className = "official";
-  const kicker = document.createElement("p");
-  kicker.className = "kicker";
-  kicker.textContent = "Official description";
-  const desc = document.createElement("p");
-  desc.textContent = trophy.description;
-  official.append(kicker, desc);
-  const window = document.createElement("p");
-  window.className = "window-copy";
-  window.textContent = trophy.window || "";
+  const label = document.createElement("span");
+  label.textContent = "Official description";
+  const quote = document.createElement("p");
+  quote.textContent = trophy.description;
+  official.append(label, quote);
   const act = document.createElement("p");
-  act.className = "act";
-  const chapter = /Chapter \d+/.exec(trophy.window || "");
-  act.textContent = `Act before ${chapter ? chapter[0] + " ends" : "the window closes"}${trophy.missions && trophy.missions.length ? ` · ${trophy.missions.join(", ")}` : ""}`;
-  const box = document.createElement("label");
-  box.className = "earn-line";
-  const input = document.createElement("input");
-  input.type = "checkbox";
-  input.checked = ctx.state.earned.includes(trophy.name);
-  input.addEventListener("change", () => ctx.onToggle(trophy, input.checked));
-  box.append(input, document.createTextNode(input.checked ? " Earned" : " Not earned yet"));
-  const cites = renderCitations(stepCites(trophy), ctx.sources, ctx.onCite);
-  node.append(head, official, window, act, box, cites);
-  return node;
+  act.className = "act-before";
+  act.textContent = "Act before: " + actBefore(trophy);
+  const box = document.createElement("section");
+  box.className = "missable-window";
+  const heading = document.createElement("h3");
+  heading.textContent = "Missable window";
+  const text = document.createElement("p");
+  text.textContent = trophy.window || "No window note is stored.";
+  box.append(heading, text);
+  article.append(top, official, act, box);
+  if (trophy.missions && trophy.missions.length && trophy.chapter !== "Any time") {
+    const missions = document.createElement("p");
+    missions.className = "missions";
+    missions.textContent = "Missions in the file: " + trophy.missions.join(", ");
+    article.append(missions);
+  }
+  return article;
 }
 
-function availability(rest, cites, ctx) {
-  const note = document.createElement("p");
-  note.className = "still";
-  note.append(document.createTextNode(`The other ${rest} are not flagged. Sources that discuss the checklist say nothing on it is missable and that free roam continues after the story, so those stay available once the credits roll. `));
-  note.append(renderCitations(cites, ctx.sources, ctx.onCite));
-  return note;
-}
-
-function availabilityCites(trophies) {
-  const ids = [];
+function remainder(trophies, flaggedCount) {
+  const aside = document.createElement("aside");
+  aside.className = "remain";
+  const title = document.createElement("h3");
+  title.textContent = "After the story";
+  const line = document.createElement("p");
+  const rest = trophies.length - flaggedCount;
+  line.textContent = "The other " + rest + " trophies are stored as missable: no. Where the sources say work remains after the story, it is cited below.";
+  aside.append(title, line);
+  const list = document.createElement("ul");
   for (const trophy of trophies) {
     for (const claim of trophy.claims || []) {
-      if (/nothing on the checklist is missable|free roam continues|free roam after/i.test(claim.t || "")) {
-        ids.push(...(claim.s || []));
-      }
+      if (!/remain after the story|remains after the story|after the credits the game returns|stays available after the credits/i.test(claim.t)) continue;
+      const item = document.createElement("li");
+      item.append(claim.t);
+      item.append(" ");
+      item.append(renderCitations((claim.s || []).map((id) => "[" + id + "]").join("")));
+      list.append(item);
     }
   }
-  return [...new Set(ids)];
+  aside.append(list);
+  return aside;
 }
 
-function stepCites(trophy) {
-  const ids = [];
-  for (const step of trophy.steps || []) ids.push(...(step.s || []));
-  for (const dispute of trophy.disputes || []) {
-    ids.push(...((dispute.a && dispute.a.s) || []), ...((dispute.b && dispute.b.s) || []));
+function actBefore(trophy) {
+  const chapter = windowChapter(trophy);
+  if (/^Chapter \d+$/.test(trophy.chapter) && trophy.missions && trophy.missions.length) {
+    return chapter + " · " + trophy.missions.join(", ");
   }
-  return [...new Set(ids)];
+  return chapter;
+}
+
+function chapterRank(chapter) {
+  const match = /^Chapter (\d+)$/.exec(chapter || "");
+  if (match) return Number(match[1]);
+  return 80;
 }

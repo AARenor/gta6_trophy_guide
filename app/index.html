@@ -3,55 +3,60 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Plate Clerk</title>
-<link rel="icon" href="favicon.svg">
+<meta name="color-scheme" content="light">
+<title>Quire · GTA VI trophy ledger</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect fill='%23f6f1e7' width='16' height='16'/%3E%3Cpath stroke='%23234e38' stroke-width='1.6' d='M3 5h10M3 8h10M3 11h7'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header id="mast">
-  <div id="brand">
-    <p class="mark">Plate Clerk</p>
-    <p id="meta" class="meta">GTA VI · PS5 · 55 trophies</p>
+<header id="top">
+  <div class="brand">
+    <p class="mark">Quire</p>
+    <p class="game">GTA VI · PS5 · 55 trophies</p>
   </div>
-  <div id="progress">
-    <p id="earned-line">0 / 55 earned</p>
-    <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" aria-label="Trophies earned"><span id="progress-fill"></span></div>
-    <p id="grade-counts">P 0/1 · G 0/2 · S 0/6 · B 0/46</p>
+  <div class="progress">
+    <div class="progress-top">
+      <p id="progress-label">0 / 55 earned</p>
+      <p id="grade-counts">P 0/1 · G 0/2 · S 0/6 · B 0/46</p>
+    </div>
+    <div class="bar" id="progress-bar"><span id="progress-fill"></span></div>
   </div>
-  <div id="actions">
-    <button id="spoiler-shield" type="button" aria-pressed="true">Spoiler shield on</button>
-    <button id="export-progress" type="button">Export</button>
-    <button id="import-progress" type="button">Import</button>
-    <input id="import-file" type="file" accept="application/json,.json" hidden>
-    <p id="saved-note">Saved in this browser</p>
+  <div class="actions">
+    <div class="action-row">
+      <button type="button" id="spoiler-shield" aria-pressed="true">Spoiler shield · On</button>
+      <button type="button" id="export-progress">Export</button>
+      <label class="btn" for="import-progress">Import
+        <input id="import-progress" type="file" accept="application/json,.json">
+      </label>
+    </div>
+    <p id="save-note">Saved in this browser</p>
   </div>
 </header>
-<section id="audit" aria-label="Guide audit"></section>
-<nav id="tabs" role="tablist" aria-label="Sections">
-  <button id="tab-tracker" type="button" role="tab" aria-selected="true" aria-controls="tracker">Tracker</button>
-  <button id="tab-roadmap" type="button" role="tab" aria-selected="false" aria-controls="roadmap">Roadmap</button>
-  <button id="tab-missables" type="button" role="tab" aria-selected="false" aria-controls="missables">Missables</button>
-  <button id="tab-sources" type="button" role="tab" aria-selected="false" aria-controls="sources">Sources</button>
+<p id="io-status" role="status"></p>
+<section id="audit" aria-label="Audit"></section>
+<nav id="tabs" aria-label="Sections">
+  <button type="button" id="tab-tracker" data-tab="tracker" aria-controls="tracker" aria-selected="true">Tracker</button>
+  <button type="button" id="tab-roadmap" data-tab="roadmap" aria-controls="roadmap" aria-selected="false">Roadmap</button>
+  <button type="button" id="tab-missables" data-tab="missables" aria-controls="missables" aria-selected="false">Missables</button>
+  <button type="button" id="tab-sources" data-tab="sources" aria-controls="sources" aria-selected="false">Sources</button>
 </nav>
-<main id="panels">
+<main>
   <section id="tracker">
-    <div id="filters" role="toolbar" aria-label="Filters"></div>
-    <div id="list-col">
-      <input id="search" type="search" placeholder="Search trophies  (/)" aria-label="Search trophies" autocomplete="off">
-      <p id="reading"></p>
-      <div id="trophy-list"></div>
+    <div id="filters">
+      <div id="chips"></div>
+      <input id="search" type="search" placeholder="Search trophies" aria-label="Search trophies" autocomplete="off">
     </div>
-    <article id="guide"></article>
-    <aside id="side">
+    <div id="list"></div>
+    <div id="guide"></div>
+    <div id="side">
       <section id="next-up"></section>
       <section id="guide-sources"></section>
-    </aside>
+    </div>
   </section>
   <section id="roadmap" hidden></section>
   <section id="missables" hidden></section>
   <section id="sources" hidden></section>
 </main>
-<p id="toast" role="status" hidden></p>
 <script type="module" src="js/app.js"></script>
 </body>
 </html>
